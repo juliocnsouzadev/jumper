@@ -24,4 +24,12 @@ public class Passaro {
         this.altura += 5;
     }
 
+    public void pula() {
+        if (this.altura >= (X + 150)) {
+            this.altura -= 150;
+        } else {
+            this.altura = 100;
+        }
+    }
+
 }
