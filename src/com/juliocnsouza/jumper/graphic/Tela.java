@@ -21,4 +21,8 @@ public class Tela {
         return this.metrics.heightPixels;
     }
 
+    public int getLargura() {
+        return this.metrics.widthPixels;
+    }
+
 }
