@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import android.graphics.Canvas;
-import android.util.Log;
 
 import com.juliocnsouza.jumper.graphic.Tela;
 
@@ -14,9 +13,11 @@ public class Canos {
     private static final int DISTANCIA_ENTRE_CANOS = 200;
     private final List<Cano> canos;
     private final Tela tela;
+    private final Pontuacao pontuacao;
 
-    public Canos(final Tela tela, final int qtdCano) {
+    public Canos(final Tela tela, final int qtdCano, final Pontuacao pontuacao) {
         this.tela = tela;
+        this.pontuacao = pontuacao;
         int posicao = 400;
         this.canos = new ArrayList<Cano>();
         for (int i = 0; i < qtdCano; i++) {
@@ -37,13 +38,10 @@ public class Canos {
             final Cano cano = iterator.next();
             cano.move();
             if (cano.saiuDaTela()) {
-                Log.i("SAIU DA TELA", "" + cano.getPosicao());
                 iterator.remove();
                 final Cano novoCano = new Cano(this.tela, getMaximo() + DISTANCIA_ENTRE_CANOS);
                 iterator.add(novoCano);
-
-            } else {
-                Log.i("NAO SAIU DA TELA", "" + cano.getPosicao());
+                this.pontuacao.aumenta();
             }
         }
     }
