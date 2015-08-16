@@ -23,7 +23,7 @@ public class Cano {
 
     private final Random random;
 
-    private int velocidadeMovimento;
+    private final int velocidadeMovimento;
 
     public Cano(final Tela tela, final int posicao) {
         super();
@@ -31,17 +31,10 @@ public class Cano {
         this.tela = tela;
         this.posicao = posicao;
         this.posicaoOriginal = posicao;
+        this.velocidadeMovimento = 2;
         reloadAltura();
-        reloadVelocidade();
     }
 
-    private void reloadVelocidade() {
-        int nextInt = 1;
-        while (nextInt < 2) {
-            nextInt = this.random.nextInt(7);
-        }
-        this.velocidadeMovimento = nextInt;
-    }
 
     private void reloadAltura() {
         int nextAltura = 1;
@@ -58,17 +51,12 @@ public class Cano {
 
     private void desenhaCanoInferiorNo(final Canvas canvas) {
         canvas.drawRect(this.posicao, this.alturaDoCanoInferior, this.posicao + LARGURA_DO_CANO,
-                        this.tela.getAltura(), Cores.getCorDoCano());
+            this.tela.getAltura(), Cores.getCorDoCano());
     }
 
     public void move() {
         if (this.posicao > (0 - LARGURA_DO_CANO)) {
-
             this.posicao -= this.velocidadeMovimento;
-        } else {
-            this.posicao = this.posicaoOriginal;
-            reloadAltura();
-            reloadVelocidade();
         }
     }
 

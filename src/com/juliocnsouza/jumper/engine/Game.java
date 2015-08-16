@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 
 import com.juliocnsouza.jumper.R;
-import com.juliocnsouza.jumper.elements.Cano;
+import com.juliocnsouza.jumper.elements.Canos;
 import com.juliocnsouza.jumper.elements.Passaro;
 import com.juliocnsouza.jumper.graphic.Tela;
 
@@ -20,9 +20,9 @@ public class Game extends SurfaceView implements Runnable, OnTouchListener {
     private boolean isRunning;
     private final SurfaceHolder holder;
     private Passaro passaro;
-    private Cano cano;
     private Bitmap back;
     private final Tela tela;
+    private Canos canos;
 
     public Game(final Context context) {
         super(context);
@@ -34,8 +34,8 @@ public class Game extends SurfaceView implements Runnable, OnTouchListener {
     }
 
     private void inicializaElementos() {
-        this.passaro = new Passaro();
-        this.cano = new Cano(this.tela, this.tela.getLargura());
+        this.passaro = new Passaro(this.tela);
+        this.canos = new Canos(this.tela, 20);
         this.back = BitmapFactory.decodeResource(getResources(), R.drawable.background);
         Bitmap.createScaledBitmap(this.back, this.back.getWidth(), this.tela.getAltura(), false);
     }
@@ -50,8 +50,8 @@ public class Game extends SurfaceView implements Runnable, OnTouchListener {
             canvas.drawBitmap(this.back, 0, 0, null);
             this.passaro.desenhaNo(canvas);
             this.passaro.cai();
-            this.cano.desenhaNo(canvas);
-            this.cano.move();
+            this.canos.desenhaNo(canvas);
+            this.canos.move();
             this.holder.unlockCanvasAndPost(canvas);
         }
     }
