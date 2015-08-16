@@ -26,13 +26,13 @@ public class Passaro {
     public void cai() {
         final boolean chegouNoChao = (this.altura + RAIO) > this.tela.getAltura();
         if (!chegouNoChao) {
-            this.altura += 5;
+            this.altura += 3;
         }
     }
 
     public void pula() {
         if ((this.altura - RAIO) > 0) {
-            this.altura -= 150;
+            this.altura -= 90;
         }
     }
 
