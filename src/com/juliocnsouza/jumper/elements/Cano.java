@@ -9,6 +9,10 @@ import com.juliocnsouza.jumper.graphic.Tela;
 
 public class Cano {
 
+    private static final int PORCENTAGEM_MINIMA = 10;
+
+    private static final int PORCENTAGEM_MAXIMA = 45;
+
     private static final int TAMANHO_DO_CANO = 250;
 
     private static final int LARGURA_DO_CANO = 100;
@@ -40,20 +44,24 @@ public class Cano {
 
 
     private void reloadAlturaInferior() {
-        int nextAltura = 1;
-        while (nextAltura < 10) {
-            nextAltura = this.random.nextInt(40);
+        int porcentagem = 1;
+        while (porcentagem < PORCENTAGEM_MINIMA) {
+            porcentagem = this.random.nextInt(PORCENTAGEM_MAXIMA);
         }
-        this.alturaDoCanoInferior =
-                        this.tela.getAltura() - ((this.tela.getAltura() / 100) * nextAltura);
+        this.alturaDoCanoInferior = this.tela.getAltura() - porcentagemDaAltura(porcentagem);
+    }
+
+
+    private int porcentagemDaAltura(final int porcentagem) {
+        return (this.tela.getAltura() / 100) * porcentagem;
     }
 
     private void reloadAlturaSuperior() {
-        int nextAltura = 1;
-        while (nextAltura < 10) {
-            nextAltura = this.random.nextInt(50);
+        int porcentagem = 1;
+        while (porcentagem < PORCENTAGEM_MINIMA) {
+            porcentagem = this.random.nextInt(PORCENTAGEM_MAXIMA);
         }
-        this.alturaDoCanoSuperior = 0 + ((this.tela.getAltura() / 100) * nextAltura);
+        this.alturaDoCanoSuperior = 0 + porcentagemDaAltura(porcentagem);
     }
 
     public void desenhaNo(final Canvas canvas) {
@@ -85,6 +93,17 @@ public class Cano {
 
     public int getPosicao() {
         return this.posicao;
+    }
+
+
+    public boolean temColisaoHorizontalCom(final Passaro passaro) {
+        return this.posicao < (passaro.X + passaro.RAIO);
+    }
+
+
+    public boolean temColisaoVerticalCom(final Passaro passaro) {
+        return ((passaro.getAltura() - passaro.RAIO) < this.alturaDoCanoSuperior)
+                        || ((passaro.getAltura() + passaro.RAIO) > this.alturaDoCanoInferior);
     }
 
 

@@ -29,4 +29,13 @@ public class Cores {
         return branco;
     }
 
+    public static Paint getCorGameOver() {
+        final Paint branco = new Paint();
+        branco.setColor(0xFFFF0000);
+        branco.setTextSize(60);
+        branco.setTypeface(Typeface.DEFAULT_BOLD);
+        branco.setShadowLayer(5, 5, 5, Color.WHITE);
+        return branco;
+    }
+
 }
